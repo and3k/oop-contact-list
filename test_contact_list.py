@@ -23,7 +23,7 @@ eve = {
 }
 friends =[bob, carol, dan]
 neighbors = [dan, carol, bob, alice]
-work =[dan, bob]
+work =[dan, bob, eve]
 def test_contact_list():
     my_list = ContactList('My Friends', friends)
     assert my_list.name == 'My Friends'
@@ -42,15 +42,21 @@ def test_add_contact():
     assert isinstance(empty_contact_book.contacts, list)
 
 def test_remove_contact():
-    newList = ContactList('my list', [bob])
+    newList = ContactList('my list', [bob, carol])
     newList.remove_contact('bob')
-    assert len(newList.contacts) == 0
+    assert len(newList.contacts) == 1
+    assert newList.contacts[0] == carol
 
 def test_shared_contacts():
+    """Within the two contact lists friends and work, there should only be bob and dan that are shared"""
     friend_contacts = ContactList('friends', friends)
     work_contacts = ContactList('work', work)
     mutuals = friend_contacts.find_shared_contacts(work_contacts)
-    assert len(mutuals.contacts) != len(friend_contacts.contacts)
-    assert mutuals.contacts[0]['name'] == 'bob'
+    assert isinstance(mutuals, ContactList)
+    assert len(mutuals.contacts) == 2
+    assert mutuals.contacts[0] == bob
+    assert mutuals.contacts[1] == dan
+
+
 
 
