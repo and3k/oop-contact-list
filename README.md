@@ -11,8 +11,6 @@ The contact list should have 3 instance methods:
 - `remove_contact('Alice')` should remove a contact from the list by name.
 - `find_shared_contacts(ContactList)` should accept another contact list as an argument, and then return a new ContactList to indicate all the contacts that appear in both lists (exact same name and phone number).
 
-
-
 For example:
 
 ```python
